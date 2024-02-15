@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -42,7 +43,11 @@
             this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UpdatetimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AenderungszeitBeiDateienAnpassenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExitSoftware = new System.Windows.Forms.ToolStripMenuItem();
+            this.ProgrammBeenden = new System.Windows.Forms.ToolStripMenuItem();
             this.LastUpdatedLabel = new System.Windows.Forms.Label();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.InTaskleisteMinimieren = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +61,8 @@
             this.toolStripMenuItem1,
             this.ordnerÜberwachenToolStripMenuItem,
             this.dateiÜberwachenToolStripMenuItem,
-            this.einstellungenToolStripMenuItem});
+            this.einstellungenToolStripMenuItem,
+            this.ExitSoftware});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -148,6 +154,23 @@
             this.AenderungszeitBeiDateienAnpassenToolStripMenuItem.Text = "Änderungszeit bei Dateien anpassen";
             this.AenderungszeitBeiDateienAnpassenToolStripMenuItem.Click += new System.EventHandler(this.AenderungszeitBeiDateienAnpassenToolStripMenuItem_Click);
             // 
+            // ExitSoftware
+            // 
+            this.ExitSoftware.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ProgrammBeenden,
+            this.InTaskleisteMinimieren});
+            this.ExitSoftware.Name = "ExitSoftware";
+            this.ExitSoftware.Size = new System.Drawing.Size(38, 20);
+            this.ExitSoftware.Text = "Exit";
+            this.ExitSoftware.Click += new System.EventHandler(this.ExitSoftware_Click);
+            // 
+            // ProgrammBeenden
+            // 
+            this.ProgrammBeenden.Name = "ProgrammBeenden";
+            this.ProgrammBeenden.Size = new System.Drawing.Size(200, 22);
+            this.ProgrammBeenden.Text = "Programm beenden";
+            this.ProgrammBeenden.Click += new System.EventHandler(this.ProgrammBeenden_Click);
+            // 
             // LastUpdatedLabel
             // 
             this.LastUpdatedLabel.AutoSize = true;
@@ -159,6 +182,19 @@
             this.LastUpdatedLabel.Text = "Du solltest diesen Text nicht sehen. LastUpdatedLabelFolder";
             this.LastUpdatedLabel.Click += new System.EventHandler(this.LastUpdatedLabelFolder_Click);
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            // 
+            // InTaskleisteMinimieren
+            // 
+            this.InTaskleisteMinimieren.Name = "InTaskleisteMinimieren";
+            this.InTaskleisteMinimieren.Size = new System.Drawing.Size(200, 22);
+            this.InTaskleisteMinimieren.Text = "In Taskleiste minimieren";
+            this.InTaskleisteMinimieren.Click += new System.EventHandler(this.InTaskleisteMinimieren_Click);
+            // 
             // FolderWatcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -168,7 +204,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FolderWatcher";
-            this.Text = "FolderWatcher";
+            this.Text = "Folder Watcher";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -193,6 +229,10 @@
         private System.Windows.Forms.ToolStripMenuItem UpdatetimeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AenderungszeitBeiDateienAnpassenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem UeberwachteOrdnerDateienAnzeigen;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ToolStripMenuItem ExitSoftware;
+        private System.Windows.Forms.ToolStripMenuItem ProgrammBeenden;
+        private System.Windows.Forms.ToolStripMenuItem InTaskleisteMinimieren;
     }
 }
 

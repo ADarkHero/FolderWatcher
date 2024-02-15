@@ -37,7 +37,7 @@ namespace FolderWatcher
 
 
         /*********************************************************************************
-         * Load
+         * Form loading and closing
          * Gets triggered wehen the form first loads
          * ******************************************************************************/
 
@@ -46,12 +46,26 @@ namespace FolderWatcher
             //Load settings
             Globals.fwi = ReadFromXmlFile<List<FolderWatcherInfo>>(settingsFilePath);
 
+            notifyIcon1.Icon = new System.Drawing.Icon(@"notifyIcon.ico");
+            notifyIcon1.Text = "Folder Watcher";
+            notifyIcon1.Visible = true;
+
             StartAllChecks();
 
             //Starts folder checks again after X Minutes
             timer.Interval = folderTimerValue * 1000; //Convert time to milliseconds
             timer.Elapsed += Timer_Elapsed;
             timer.Start();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                notifyIcon1.Visible = true;
+                this.Hide();
+                e.Cancel = true;
+            }
         }
 
         /*********************************************************************************
@@ -418,6 +432,35 @@ namespace FolderWatcher
         }
 
         /*********************************************************************************
+         * Exit buttons
+         * Menu item "Exit"
+         * ******************************************************************************/
+
+        private void ProgrammBeenden_Click(object sender, EventArgs e)
+        {
+            System.Environment.Exit(0);
+        }
+
+        private void InTaskleisteMinimieren_Click(object sender, EventArgs e)
+        {
+            notifyIcon1.Visible = true;
+            this.Hide();
+        }
+
+        /*********************************************************************************
+        * NotifyIcon 
+        * Minimize from taskbar
+        * ******************************************************************************/
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Show();
+        }
+
+
+
+
+        /*********************************************************************************
         * Unneccessary bs
         * ******************************************************************************/
 
@@ -436,6 +479,13 @@ namespace FolderWatcher
         {
 
         }
+
+        
+
+        private void ExitSoftware_Click(object sender, EventArgs e)
+        {
+        }
+
 
     }
 
