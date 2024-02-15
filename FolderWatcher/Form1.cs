@@ -97,7 +97,10 @@ namespace FolderWatcher
             //Add a smiley button, if there are no errors. :)
             if (buttonsAdded.Count == 0)
             {
-                AddNewButton(10, 50, "Derzeit gibt es keine Probleme!" + Environment.NewLine + Environment.NewLine + "😀", 300, Color.Green);
+                Invoke(new MethodInvoker(delegate {
+                    AddNewButton(10, 50, "Derzeit gibt es keine Probleme!" + Environment.NewLine + Environment.NewLine + "😀", 300, Color.Green);
+                }));
+                
             }
 
             //Write the current date to a label on the gui
@@ -351,11 +354,14 @@ namespace FolderWatcher
                     string input = Interaction.InputBox("Welcher Text soll im Dateinamen enthalten sein?",
                         "Suchstring eingeben." + Environment.NewLine + "* ist ein Platzhalterzeichen", "*");
 
-                    FolderWatcherInfo newfwi = new FolderWatcherInfo(fbd.SelectedPath, input);
-                    Globals.fwi.Add(newfwi);
-                    SaveSettings();
+                    if(input != "")
+                    {
+                        FolderWatcherInfo newfwi = new FolderWatcherInfo(fbd.SelectedPath, input);
+                        Globals.fwi.Add(newfwi);
+                        SaveSettings();
 
-                    MessageBox.Show("Neuen Ordner zur Überwachung hinzugefügt!" + Environment.NewLine + fbd.SelectedPath + Environment.NewLine + input);
+                        MessageBox.Show("Neuen Ordner zur Überwachung hinzugefügt!" + Environment.NewLine + fbd.SelectedPath + Environment.NewLine + input);
+                    }                
                 }
             }
         }
@@ -449,12 +455,19 @@ namespace FolderWatcher
 
         /*********************************************************************************
         * NotifyIcon 
-        * Minimize from taskbar
+        * Maximize from taskbar; Close via right click menu
         * ******************************************************************************/
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            this.WindowState = FormWindowState.Minimized;
             this.Show();
+            this.WindowState = FormWindowState.Normal;
+        }
+
+        private void ProgrammBeendenNotifyIcon_Click(object sender, EventArgs e)
+        {
+            System.Environment.Exit(0);
         }
 
 
@@ -486,7 +499,7 @@ namespace FolderWatcher
         {
         }
 
-
+        
     }
 
     public static class Globals

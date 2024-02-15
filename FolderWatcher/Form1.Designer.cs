@@ -45,10 +45,13 @@
             this.AenderungszeitBeiDateienAnpassenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitSoftware = new System.Windows.Forms.ToolStripMenuItem();
             this.ProgrammBeenden = new System.Windows.Forms.ToolStripMenuItem();
+            this.InTaskleisteMinimieren = new System.Windows.Forms.ToolStripMenuItem();
             this.LastUpdatedLabel = new System.Windows.Forms.Label();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.InTaskleisteMinimieren = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripNotifyIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ProgrammBeendenNotifyIcon = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
+            this.contextMenuStripNotifyIcon.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -171,6 +174,13 @@
             this.ProgrammBeenden.Text = "Programm beenden";
             this.ProgrammBeenden.Click += new System.EventHandler(this.ProgrammBeenden_Click);
             // 
+            // InTaskleisteMinimieren
+            // 
+            this.InTaskleisteMinimieren.Name = "InTaskleisteMinimieren";
+            this.InTaskleisteMinimieren.Size = new System.Drawing.Size(200, 22);
+            this.InTaskleisteMinimieren.Text = "In Taskleiste minimieren";
+            this.InTaskleisteMinimieren.Click += new System.EventHandler(this.InTaskleisteMinimieren_Click);
+            // 
             // LastUpdatedLabel
             // 
             this.LastUpdatedLabel.AutoSize = true;
@@ -184,16 +194,24 @@
             // 
             // notifyIcon1
             // 
+            this.notifyIcon1.ContextMenuStrip = this.contextMenuStripNotifyIcon;
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
-            // InTaskleisteMinimieren
+            // contextMenuStripNotifyIcon
             // 
-            this.InTaskleisteMinimieren.Name = "InTaskleisteMinimieren";
-            this.InTaskleisteMinimieren.Size = new System.Drawing.Size(200, 22);
-            this.InTaskleisteMinimieren.Text = "In Taskleiste minimieren";
-            this.InTaskleisteMinimieren.Click += new System.EventHandler(this.InTaskleisteMinimieren_Click);
+            this.contextMenuStripNotifyIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ProgrammBeendenNotifyIcon});
+            this.contextMenuStripNotifyIcon.Name = "contextMenuStripNotifyIcon";
+            this.contextMenuStripNotifyIcon.Size = new System.Drawing.Size(181, 48);
+            // 
+            // ProgrammBeendenNotifyIcon
+            // 
+            this.ProgrammBeendenNotifyIcon.Name = "ProgrammBeendenNotifyIcon";
+            this.ProgrammBeendenNotifyIcon.Size = new System.Drawing.Size(180, 22);
+            this.ProgrammBeendenNotifyIcon.Text = "Programm Beenden";
+            this.ProgrammBeendenNotifyIcon.Click += new System.EventHandler(this.ProgrammBeendenNotifyIcon_Click);
             // 
             // FolderWatcher
             // 
@@ -208,6 +226,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.contextMenuStripNotifyIcon.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,6 +252,8 @@
         private System.Windows.Forms.ToolStripMenuItem ExitSoftware;
         private System.Windows.Forms.ToolStripMenuItem ProgrammBeenden;
         private System.Windows.Forms.ToolStripMenuItem InTaskleisteMinimieren;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripNotifyIcon;
+        private System.Windows.Forms.ToolStripMenuItem ProgrammBeendenNotifyIcon;
     }
 }
 
