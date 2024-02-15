@@ -25,7 +25,7 @@ namespace FolderWatcher
         {
             foreach(FolderWatcherInfo f in Globals.fwi)
             {
-                richTextBox1.AppendText(f.filePath + seperator + f.searchString + seperator + f.watchMethod + Environment.NewLine);
+                richTextBox1.AppendText(f.filePath + seperator + f.searchString + seperator + f.watchMethod + seperator + f.option1 + Environment.NewLine);
             }
         }
 
@@ -47,11 +47,13 @@ namespace FolderWatcher
                     try
                     {
                         var field = line.Split(seperator);
-                        Globals.fwi.Add(new FolderWatcherInfo(field[0], field[1], field[2]));
+                        String f3 = ""; //field3 can be empty/nonexistent
+                        if (field.ElementAtOrDefault(3) != null) { f3 = field[3]; }
+                        Globals.fwi.Add(new FolderWatcherInfo(field[0], field[1], field[2], f3));
                     }
                     catch(Exception ex)
                     {
-
+                        Console.WriteLine("Fehler beim Speichern!" + Environment.NewLine + ex);
                     }
                 }
             }            

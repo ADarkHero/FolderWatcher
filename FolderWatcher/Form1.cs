@@ -25,6 +25,7 @@ namespace FolderWatcher
         public static String settingsFilePath = "settings.xml";
         private List<Button> buttonsAdded = new List<Button>();
         System.Timers.Timer timer = new System.Timers.Timer();
+        private int buttonsPerRow = 8;
 
 
         [DllImport("user32.dll")]
@@ -89,6 +90,7 @@ namespace FolderWatcher
 
         public void StartAllChecks()
         {
+            NoErrorsButton.Hide();
             RemoveAddedButtons();
 
             CheckForFilesInFolder();
@@ -98,7 +100,7 @@ namespace FolderWatcher
             if (buttonsAdded.Count == 0)
             {
                 Invoke(new MethodInvoker(delegate {
-                    AddNewButton(10, 50, "Derzeit gibt es keine Probleme!" + Environment.NewLine + Environment.NewLine + "😀", 300, Color.Green);
+                    NoErrorsButton.Show();
                 }));
                 
             }
@@ -128,8 +130,8 @@ namespace FolderWatcher
 
                         if (files.Count() != 0)
                         {
-                            if (i == 5) { j++; i -= 5; }
-                            Invoke(new MethodInvoker(delegate { AddNewButton(i * 100 + i * 10 + 10, j * 100 + 50, f.filePath, 100, Color.Red); }));
+                            if (i == buttonsPerRow) { j++; i -= buttonsPerRow; }
+                            Invoke(new MethodInvoker(delegate { AddNewErrorButton(i, j, f.filePath); }));
 
                             i++;
 
@@ -165,15 +167,28 @@ namespace FolderWatcher
                 {
                     DateTime modification = File.GetLastWriteTime(@f.filePath);
                     DateTime currentDateTime = DateTime.Now;
+                    int maxDiffSeconds = changeDateTimerValue;
+                    //Allows manual override of the standard timeframe
+                    if (f.option1 != "")
+                    {
+                        try
+                        {
+                            maxDiffSeconds = Int32.Parse(f.option1);
+                        }
+                        catch(Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                        }         
+                    }
                     TimeSpan duration = currentDateTime - modification;
 
-                    if(duration.TotalSeconds > changeDateTimerValue)
+                    if(duration.TotalSeconds > maxDiffSeconds)
                     {
-                        while(i >= 5) { j++; i -= 5; } //Calculate current button position
-                        Invoke(new MethodInvoker(delegate { AddNewButton(i * 100 + i * 10 + 10, j * 100 + 50, f.filePath, 100, Color.Red); }));
+                        while(i >= buttonsPerRow) { j++; i -= buttonsPerRow; } //Calculate current button position
+                        Invoke(new MethodInvoker(delegate { AddNewErrorButton(i, j, f.filePath); }));
 
                         new ToastContentBuilder()
-                            .AddText("Die folgende Datei wurde seit über " + changeDateTimerValue + " Sekunden nicht aktualisiert:" 
+                            .AddText("Die folgende Datei wurde seit über " + maxDiffSeconds + " Sekunden nicht aktualisiert:" 
                             + Environment.NewLine + f.filePath)
                             .AddButton(new ToastButton()
                             .SetContent("Betroffene Datei öffnen")
@@ -196,14 +211,14 @@ namespace FolderWatcher
          * Adding Buttons on the fly etc.
          * ******************************************************************************/
 
-        private void AddNewButton(int xpos, int ypos, String filePath, int size, Color color)
+        private void AddNewErrorButton(int xpos, int ypos, String filePath)
         {
             Button testbutton = new Button();
             testbutton.Text = filePath;
-            testbutton.Location = new Point(xpos, ypos);
-            testbutton.Size = new Size(size, size);
+            testbutton.Location = new Point(xpos * 100 + 10, ypos * 100 + 25);
+            testbutton.Size = new Size(100, 100);
             testbutton.Visible = true;
-            testbutton.BackColor = color;
+            testbutton.BackColor = Color.Red;
             testbutton.Click += (s, e) => {
                 try
                 {
@@ -470,7 +485,10 @@ namespace FolderWatcher
             System.Environment.Exit(0);
         }
 
-
+        private void UeberpruefungManuellStartenNotifyIcon_Click(object sender, EventArgs e)
+        {
+            StartAllChecks();
+        }
 
 
         /*********************************************************************************
@@ -499,7 +517,6 @@ namespace FolderWatcher
         {
         }
 
-        
     }
 
     public static class Globals

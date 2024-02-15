@@ -12,12 +12,14 @@ namespace FolderWatcher
         public string filePath = "";
         public string searchString = "";
         public string watchMethod = "";
+        public string option1 = "-1";
 
-        public FolderWatcherInfo(String path, String search = "*", String method = "folder")
+        public FolderWatcherInfo(String path, String search = "*", String method = "folder", string op1 = "")
         {
             filePath = path;
             searchString = search;
             watchMethod = method;
+            option1 = op1;
         }
 
         public FolderWatcherInfo()

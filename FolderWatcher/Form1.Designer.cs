@@ -50,6 +50,8 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStripNotifyIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ProgrammBeendenNotifyIcon = new System.Windows.Forms.ToolStripMenuItem();
+            this.UeberpruefungManuellStartenNotifyIcon = new System.Windows.Forms.ToolStripMenuItem();
+            this.NoErrorsButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStripNotifyIcon.SuspendLayout();
             this.SuspendLayout();
@@ -68,7 +70,7 @@
             this.ExitSoftware});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(944, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -86,7 +88,7 @@
             // 
             this.ordnerüberprüfungManuellStartenToolStripMenuItem.Name = "ordnerüberprüfungManuellStartenToolStripMenuItem";
             this.ordnerüberprüfungManuellStartenToolStripMenuItem.Size = new System.Drawing.Size(272, 22);
-            this.ordnerüberprüfungManuellStartenToolStripMenuItem.Text = "Ordnerüberprüfung manuell starten";
+            this.ordnerüberprüfungManuellStartenToolStripMenuItem.Text = "Überprüfung manuell starten";
             this.ordnerüberprüfungManuellStartenToolStripMenuItem.Click += new System.EventHandler(this.ordnerüberprüfungManuellStartenToolStripMenuItem_Click);
             // 
             // UeberwachteOrdnerDateienAnzeigen
@@ -185,7 +187,7 @@
             // 
             this.LastUpdatedLabel.AutoSize = true;
             this.LastUpdatedLabel.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LastUpdatedLabel.Location = new System.Drawing.Point(12, 428);
+            this.LastUpdatedLabel.Location = new System.Drawing.Point(12, 403);
             this.LastUpdatedLabel.Name = "LastUpdatedLabel";
             this.LastUpdatedLabel.Size = new System.Drawing.Size(420, 14);
             this.LastUpdatedLabel.TabIndex = 2;
@@ -202,22 +204,42 @@
             // contextMenuStripNotifyIcon
             // 
             this.contextMenuStripNotifyIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ProgrammBeendenNotifyIcon});
+            this.ProgrammBeendenNotifyIcon,
+            this.UeberpruefungManuellStartenNotifyIcon});
             this.contextMenuStripNotifyIcon.Name = "contextMenuStripNotifyIcon";
-            this.contextMenuStripNotifyIcon.Size = new System.Drawing.Size(181, 48);
+            this.contextMenuStripNotifyIcon.Size = new System.Drawing.Size(228, 48);
             // 
             // ProgrammBeendenNotifyIcon
             // 
             this.ProgrammBeendenNotifyIcon.Name = "ProgrammBeendenNotifyIcon";
-            this.ProgrammBeendenNotifyIcon.Size = new System.Drawing.Size(180, 22);
+            this.ProgrammBeendenNotifyIcon.Size = new System.Drawing.Size(227, 22);
             this.ProgrammBeendenNotifyIcon.Text = "Programm Beenden";
             this.ProgrammBeendenNotifyIcon.Click += new System.EventHandler(this.ProgrammBeendenNotifyIcon_Click);
+            // 
+            // UeberpruefungManuellStartenNotifyIcon
+            // 
+            this.UeberpruefungManuellStartenNotifyIcon.Name = "UeberpruefungManuellStartenNotifyIcon";
+            this.UeberpruefungManuellStartenNotifyIcon.Size = new System.Drawing.Size(227, 22);
+            this.UeberpruefungManuellStartenNotifyIcon.Text = "Überprüfung manuell starten";
+            this.UeberpruefungManuellStartenNotifyIcon.Click += new System.EventHandler(this.UeberpruefungManuellStartenNotifyIcon_Click);
+            // 
+            // NoErrorsButton
+            // 
+            this.NoErrorsButton.BackColor = System.Drawing.Color.Green;
+            this.NoErrorsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NoErrorsButton.Location = new System.Drawing.Point(10, 25);
+            this.NoErrorsButton.Name = "NoErrorsButton";
+            this.NoErrorsButton.Size = new System.Drawing.Size(922, 375);
+            this.NoErrorsButton.TabIndex = 3;
+            this.NoErrorsButton.Text = "Derzeit gibt es keine Probleme! 😀";
+            this.NoErrorsButton.UseVisualStyleBackColor = false;
             // 
             // FolderWatcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(944, 441);
+            this.Controls.Add(this.NoErrorsButton);
             this.Controls.Add(this.LastUpdatedLabel);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -254,6 +276,8 @@
         private System.Windows.Forms.ToolStripMenuItem InTaskleisteMinimieren;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripNotifyIcon;
         private System.Windows.Forms.ToolStripMenuItem ProgrammBeendenNotifyIcon;
+        private System.Windows.Forms.ToolStripMenuItem UeberpruefungManuellStartenNotifyIcon;
+        private System.Windows.Forms.Button NoErrorsButton;
     }
 }
 
